@@ -1,0 +1,83 @@
+﻿@model ISkillsMyApp.Models.ProductsModel
+@{
+    ViewBag.Title = "Online Books Store Shop";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h2> 
+       Online Shop
+    </h2>
+    @using (Html.BeginForm("Index", "Shop", FormMethod.Post, new { id = "ShopForm" }))
+    { 
+        @Html.HiddenFor(x => x.Pagination.CurrentPage);
+        @Html.HiddenFor(x => x.Pagination.ItemsPerPage);
+        @Html.HiddenFor(x => x.Pagination.TotalItems);
+    <div class="well">
+        <div>
+            Category :
+            @Html.DropDownListFor(x => x.CategoryID, Model.Categories(), "Select a category",
+            new
+            {
+                onchange = "document.getElementById('ShopForm').submit();"
+            })
+            <span class="pull-right">
+                Search For :
+                @Html.TextAreaFor(x => x.SearchString)
+                <input type="submit" value="Search" />
+            </span>
+        </div>
+    </div>
+        foreach (var item in Model.Products)
+        {
+            @Html.Partial("Product", item)
+        }
+    <div class="btn-group pull-right">
+       @Html.PageLinks(Model.Pagination, x => Url.Action("Index", new { Page = x ,categoryID=Model.CategoryID }))
+    </div>
+    }
+    @*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+
+        </tr>
+        <tr>
+            @foreach(var item in Model)
+            {
+                <td>
+                    @Html.DisplayFor(modelitem=>item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelitem => item.Image)
+                </td>
+                <td>
+                    @Html.ActionLink("More Info", "Info", new { id=item.ProductID})
+                </td>
+            }
+        </tr>
+    </table>*@
+</body>
+</html>

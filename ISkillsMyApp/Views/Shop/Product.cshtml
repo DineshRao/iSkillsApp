@@ -1,0 +1,21 @@
+﻿@model ISkillsMyApp.Models.Product
+
+<div class="row panel">
+    <div class="col-xs-4">
+        <img src="@Model.Image" width="170" height="276" alt="@Model.ProductName" title="@Model.ProductName" />
+    </div>
+    <div class="well col-xs-8">
+        <h3>
+            @Html.DisplayFor(modelitem => Model.ProductName)
+        </h3>
+        <p>
+            @Html.DisplayFor(modelitem => Model.Description)
+        </p>
+        <p class="pull-right label label-primary">
+            $@Html.DisplayFor(modelitem => Model.Price)
+        </p>
+        <p>
+            @Html.ActionLink("More Info", "Index", "ItemDetail", new { id = Model.ProductID }, new { id = "ProductID" })
+        </p>
+    </div>
+</div>

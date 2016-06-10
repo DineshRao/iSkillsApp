@@ -1,0 +1,45 @@
+﻿@model ISkillsMyApp.Models.Product
+@{
+    ViewBag.Title = "Online Books Store Shop";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+        <h2>
+            Online Shop
+        </h2>
+        <div style="display:inline-block">
+            <div style="width:190px;float:left">
+                <img src="@Model.Image" width="170" height="276" alt="@Model.ProductName" title="@Model.ProductName" />
+            </div>
+            <div style="width:70%;float:left">
+                <h1>
+                    @Html.DisplayFor(modelItem=>modelItem.ProductName)
+                </h1>
+                <p>
+                    @Html.Raw(@Model.Details)
+                </p>
+                <p>
+                    $@Html.DisplayFor(modelItem=>modelItem.Price)
+                </p>
+                <p>
+                    @Html.ActionLink("More Info", "Index", "ItemDetail", new { id = Model.ProductID }, new { id = "ProductID" })
+                </p>
+                @using (Html.BeginForm("AddToCart", "ShoppingCart"))
+                {
+                    <div class="pull-right">
+                        @Html.HiddenFor(x => x.ProductID)
+                        @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+                        <input type="submit" class="btn btn-success" value="Add to cart" />
+                    </div>
+                }
+            </div>    
+        </div>
+</body>
+</html>
