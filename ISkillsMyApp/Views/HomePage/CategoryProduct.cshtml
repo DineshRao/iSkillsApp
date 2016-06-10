@@ -1,0 +1,18 @@
+﻿@model ISkillsMyApp.Models.Product
+@using ISkillsMyApp.Models
+
+@{
+    ViewBag.Title = "CategoryProduct";
+}
+
+<h2>List of Books</h2>
+<ul class="nav nav-pills">
+    @foreach (var product in Model)
+    {
+        <li>
+            @Html.Partial("_CategoryProduct")
+        </li>
+
+    }
+</ul>
+

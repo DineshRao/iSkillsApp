@@ -1,27 +1,32 @@
-﻿
+﻿@model IEnumerable<ISkillsMyApp.Models.Categories>
+    @using ISkillsMyApp.Models
+
 @{
-    ViewBag.Title = "Online Books Store HomePage";
+    ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <h2>Building Ecommerce apps</h2>
-    <p>
-        This is a demo Ecommerce app
-    </p>
-    <p>
-        This has Shopping cart with checkout options and details come with all other things so wanna see the taste of this app....
-    </p>
-    <ul class="list">
-        <li>Lets see the demo</li>
-        <li>Using MVC</li>
-        <li>We will work with EF</li>
-    </ul>
-</body>
-</html>
 
+
+
+<body background="http://www.elcamino.edu/studentservices/bookstore/images/bookstore1.jpg"
+<h2><center>All Books in One Place</center></h2>
+<br />
+<p> On the menus below you can learn about many Book store services, books and shop for your favourate merchandise! <br/>
+Click on tabs below to learn more about</p>
+<ul class="nav nav-pills">
+
+@foreach (Categories category in Model)
+{
+<li>
+@*@Html.ActionLink(category.CategoryName, "CategoryProduct", new { id = category.CategoryID })*@
+@Ajax.ActionLink(category.CategoryName, "CategoryProduct", new{id= category.CategoryID }, new AjaxOptions{ UpdateTargetId= "partialDiv"},new { })
+</li>
+}
+
+</ul>
+<div id="partialDiv">
+
+</div>
+
+
+    <script src="~/Scripts/jquery-1.9.0.min.js"></script>
